@@ -12,11 +12,11 @@
 #include "mikagunspin.hpp"
 #include "mikabounce.hpp"
 
-char screen = '0';
-
+//init main variables and objects
 BluetoothSerial SerialBT;
-
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+char screen = '0';
 
 void setup() {
 
@@ -43,23 +43,19 @@ void setup() {
   Serial.println(F("SSD1306 allocation failed"));
   for(;;);
   }
-
-  //Setup screens
-  insmat_scroll_setup();
 }
 
 void loop() {
   if(SerialBT.available())
   {
-    char incomingChar = SerialBT.read();
-    if(incomingChar == '0' || incomingChar == '1' || incomingChar == '2')
+    char incomingChar = SerialBT.read(); //Read next char from serialBT
+    if(incomingChar == '0' || incomingChar == '1' || incomingChar == '2') //Allowed modes. TODO make this better
     {
       screen = incomingChar;
       display.setRotation(0); //Clear rotation
     }
-    Serial.write(screen);
   }
-  switch (screen-'0')
+  switch (screen-'0') //Subtract 48 from char to convert it to int
   {
   case 0:
   insmat_scroll_loop();

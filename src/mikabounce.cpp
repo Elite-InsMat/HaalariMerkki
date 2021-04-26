@@ -4,9 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "globals.hpp"
-
-#define MIKA_SMILE_SIZEX 30
-#define MIKA_SMILE_SIZEY 39
+#include "mikabounce.hpp"
 
 static const uint8_t mika_smile[] = {
   0x00, 0x03, 0xf0, 0x00, 
